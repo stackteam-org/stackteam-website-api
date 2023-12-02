@@ -23,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/consultation/store', Consultation::class);
 Route::any('/comming-soon', CommingSoonAPI::class);
+
+Route::post('/user',[\App\Http\Controllers\api\AuthController::class,'register']);
+
