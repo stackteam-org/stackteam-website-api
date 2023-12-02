@@ -17,12 +17,12 @@ use App\Http\Controllers\CommingSoonAPI;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/consultation/store', Consultation::class);
 Route::any('/comming-soon', CommingSoonAPI::class);
 
-Route::post('/user',[\App\Http\Controllers\api\AuthController::class,'register']);
+Route::prefix('v1')->group(function (){
+    Route::post('/user/register',[\App\Http\Controllers\api\AuthController::class,'register']);
+    Route::post('/user/login',[\App\Http\Controllers\api\AuthController::class,'login']);
+});
+
 
