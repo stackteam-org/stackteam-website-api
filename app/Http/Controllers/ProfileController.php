@@ -43,7 +43,7 @@ class ProfileController extends Controller
         $request->user()->fill($request->validated());
 
         if($request->hasFile('avatar')){
-            
+
             $request->validate([
                 'avatar' => 'image',
             ]);
@@ -52,11 +52,12 @@ class ProfileController extends Controller
             $avatarName = time() . '.' . $request->avatar->extension();
             $request->avatar->storeAs('public/images', $avatarName);
 
-            Auth()->user()->update((['avatar'=>$avatarName]));
+            Auth()->user()->update(['avatar'=>$avatarName]);
         }
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
+            $request->user()->avatar = $avatarName;
         }
 
         $request->user()->save();
