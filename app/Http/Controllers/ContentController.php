@@ -25,7 +25,7 @@ class ContentController extends Controller
 
         $lang = is_null($request->input('lang')) ? 'en' : $request->input('lang');
 
-        $response = Lang::get('index',[],$lang);
+        $response = Lang::get('wellcome',[],$lang);
         
         // get data form database -----------------------------
         $response['services']['items'] = Service::where('lang',$lang)
