@@ -33,11 +33,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::prefix('{lang?}')->group(function () {
-
-                Route::middleware(['web','lang'])
+                Route::middleware('web')
                     ->group(base_path('routes/web.php'));
-            });
         });
     }
 

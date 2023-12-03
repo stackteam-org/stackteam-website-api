@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Consultation;
 use App\Http\Controllers\CommingSoonAPI;
+use App\Http\Controllers\ContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,13 @@ use App\Http\Controllers\CommingSoonAPI;
 Route::post('/consultation/store', Consultation::class);
 Route::any('/comming-soon', CommingSoonAPI::class);
 
+<<<<<<< HEAD
 Route::prefix('v1')->group(function (){
     Route::post('/user/register',[\App\Http\Controllers\api\AuthController::class,'register']);
     Route::post('/user/login',[\App\Http\Controllers\api\AuthController::class,'login']);
 });
 
 
+=======
+Route::get('/content',ContentController::class);
+>>>>>>> 271e758 (some change on Route | add content api)

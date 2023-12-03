@@ -2,7 +2,7 @@
 
 return[
     'content'=>[
-        'nameofcompany'=>'استک تیم ',
+        'name'=>'استک تیم ',
         'findteam' => 'تیمت رو بساز',
         'view' => 'مشاهده',
         'team' => 'تیم ما',
