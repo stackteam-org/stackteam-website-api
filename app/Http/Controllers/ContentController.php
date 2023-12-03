@@ -18,19 +18,22 @@ class ContentController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $response = Lang::get('wellcome');
+
+    }
+
+    public function wellcome (Request $request) {
+
+        $lang = is_null($request->input('lang')) ? 'en' : $request->input('lang');
+
+        $response = Lang::get('index',[],$lang);
+        
         // get data form database -----------------------------
-        $response['services']['items'] = Service::where('lang',App::getLocale())
+        $response['services']['items'] = Service::where('lang',$lang)
         ->select(['name','id','title','subtitle','lang'])
         ->get();
         // ---------------------------------------------------
 
         return response()->json($response);
-    }
-
-    public function wellcome () {
-
-        
     }
 
     

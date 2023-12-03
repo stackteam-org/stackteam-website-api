@@ -23,4 +23,4 @@ Route::prefix('v1')->group(function (){
     Route::post('/user/login',[\App\Http\Controllers\api\AuthController::class,'login']);
 });
 
-Route::get('/content',ContentController::class);
+Route::post('/content/wellcome',[ContentController::class,'wellcome']);
