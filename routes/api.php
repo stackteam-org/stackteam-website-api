@@ -39,4 +39,4 @@ Route::resource('tag',TagController::class)->only(['index']);
 Route::resource('category',CategoryController::class)->only(['index']);
 Route::get('/authors', [AuthorController::class, 'getAuthors']);
 Route::get('/technologies', [TechnologyCategoryController::class, 'index']);
-Route::get('/get-articles-by-category/{category_id}', [ArticleController::class, 'getArticlesByCategory']);
+Route::post('/get-articles-by-category/', [ArticleController::class, 'getArticlesByCategory']);

@@ -17,9 +17,9 @@ class TechnologyCategory extends Model
         'lang'
     ];
 
-    public function articles()
+    public function Technologies()
     {
-        return $this->belongsToMany(Article::class, 'technologies', 'technology_category_id','article_id');
+        return $this->hasMany(Technology::class)->with('article');//->select(['id','article_id']);
     }
 
 }

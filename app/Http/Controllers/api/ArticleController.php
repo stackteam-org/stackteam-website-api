@@ -82,19 +82,12 @@ class ArticleController extends Controller
         return response()->json(['success' => $likeSet]);
     }
 
-    public function getArticlesByCategory($category_id)
+    public function getArticlesByCategory(Request $request)
     {
-        //$category = TechnologyCategory::find($category_id)->articles()->get();
-        // $articles = Article::select(['id', 'name'])
-        // ->with('technologies')
-        // ->get();
-
-        $category = TechnologyCategory::find($category_id)
-            ->with('articles')
+    
+        $category = TechnologyCategory::where('id',$request ->category_id)
+            ->with('Technologies')
             ->get();
-
-        return response()->json($category);
-
 
         if (!$category)
             return response()->json(['error' => 'Category not found.'], 404);
@@ -102,26 +95,6 @@ class ArticleController extends Controller
         return response()->json($category);
     }
    
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -134,37 +107,4 @@ class ArticleController extends Controller
         return response()->json($article);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

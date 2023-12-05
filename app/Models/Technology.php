@@ -14,5 +14,8 @@ class Technology extends Model
         'article_id',
     ];
 
-
+    public function article()
+    {
+        return $this->hasOne(Article::class,'id')->select(['id','name','title','subtext']);
+    }
 }
