@@ -33,7 +33,7 @@ class Article extends Model
         return $this->belongsToMany(Tag::class, 'articles_tags');
     }
 
-    public function technology()
+    public function technologies()
     {
         return $this->belongsToMany(TechnologyCategory::class, 'technologies', 'article_id','technology_category_id');
     }
@@ -42,4 +42,10 @@ class Article extends Model
         return $this->belongsTo(Category::class,'category_id');
     }
 
+    public function like(): bool
+    {
+        $this->like++;
+
+        return $this->save();
+    }
 }
