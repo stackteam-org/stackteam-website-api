@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\ArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,7 @@ Route::prefix('v1')->group(function (){
 });
 
 Route::post('/content/wellcome',[ContentController::class,'wellcome']);
+
+Route::resource('article',ArticleController::class)->only([
+    'index', 'show'
+]);;

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\User\MexcController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,9 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::group(['prefix'=> 'mexc','as'=> 'mexc.','middleware'=> ['auth']], function() {
-    Route::get('/', [MexcController::class,'index'])->name('index');
-});
 
 
 
