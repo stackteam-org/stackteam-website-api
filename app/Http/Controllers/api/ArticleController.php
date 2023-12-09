@@ -49,10 +49,30 @@ class ArticleController extends Controller
         }
 
         $count = $request->input('count', 10); 
-        $articles = $articlesQuery->with(['author', 'category', 'tags'])
+        $pagination = $articlesQuery->with(['author', 'category', 'tags'])
                                   ->paginate($count);
 
-        return response()->json($articles);
+        // return response()->json($articles);
+           // تفکیک اطلاعات پیجینیشن
+    $response = [
+        'data' => $pagination->items(),
+        'meta' => [
+            'current_page' => $pagination->currentPage(),
+            'last_page'    => $pagination->lastPage(),
+            'per_page'     => $pagination->perPage(),
+            'total'        => $pagination->total(),
+            'from'         => $pagination->firstItem(),
+            'to'           => $pagination->lastItem(),
+        ],
+        'links' => [
+            'first_page_url' => $pagination->url(1),
+            'last_page_url'  => $pagination->url($pagination->lastPage()),
+            'next_page_url'  => $pagination->nextPageUrl(),
+            'prev_page_url'  => $pagination->previousPageUrl(),
+        ]
+    ];
+
+    return response()->json($response);
 
     }
 
