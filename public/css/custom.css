@@ -34,6 +34,9 @@ body .theme-btn-one:hover , .hero-banner-two .hero-text-wrapper form button:hove
   .hero-banner-seven .illustration-container{top:auto;}
   .textarea-request{border:none;border-bottom:2px solid #000;width:100%;}
 
-
-
- 
+.w-50{
+  width: 50% !important;
+}
+.w-95{
+  width: 95% !important;
+}

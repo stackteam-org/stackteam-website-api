@@ -37,6 +37,13 @@ class ArticleController extends Controller
             });
         }
 
+        
+        if ($request->has('lang')) {
+            $articlesQuery->where('lang',$request->input('lang') );
+        }else{
+            $articlesQuery->where('lang','en');
+        }
+
         if ($request->has('popular') && $request->input('popular') == 'true') {
             $articlesQuery->orderBy('visit', 'desc');
         }

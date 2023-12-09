@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -26,7 +27,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view("dashboard.article.create");
+        $categories = Category::orderBy("created_at","desc")->get();
+        return view("dashboard.article.create", compact("categories"));
     }
 
     /**
@@ -37,7 +39,32 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        
+        $request->validate([
+            'name' => 'required',
+            'title' => 'required',
+            'subtext' => 'required',
+            'text' => 'required',
+            'category_id' => 'required',
+            'read_time' => 'required',
+            'lang' => 'required',
+
+        ]);
+        $author_id = auth()->user()->id;
+
+        Article::create([
+            'name' => $request->name,
+            'title' => $request->title,
+            'subtext' => $request->subtext,
+            'text' => $request->name,
+            'category_id' => $request->category_id,
+            'read_time' => $request->read_time,
+            'lang' => $request->lang,
+            'author_id' =>  $author_id ,
+
+        ]);
+        return redirect()->route('dashboard.article.index')->with('success','Company has been created successfully.');
+
     }
 
     /**

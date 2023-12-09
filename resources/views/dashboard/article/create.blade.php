@@ -24,15 +24,70 @@
                                            <!--begin::Input group-->
                         <div class="mb-10 fv-row">
                             <!--begin::Label-->
-                            <label class="required ">Category Name</label>
+                            <label class="required ">Name</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" name="category_name" class="form-control mb-2" placeholder="Product name" value="" />
+                            <input type="text" name="name" class="form-control mb-2" placeholder="Product name" value="" />
                             <!--end::Input-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">A category name is required and recommended to be unique.</div>
-                            <!--end::Description-->
                         </div>
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label class="required ">title</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" name="title" class="form-control mb-2" placeholder="Product title" value="" />
+                            <!--end::Input-->
+                    
+                        </div> 
+                           <div class="mb-10 fv-row w-50">
+                            <!--begin::Label-->
+                            <label class="required ">Category</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select name="category_id" id="category_id" class="form-control mb-2">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}"{{ old('category_id') == $category->id ? ' selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+ 
+                        <div class="mb-10 fv-row w-50">
+                            <!--begin::Label-->
+                            <label class="required ">langoage</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select name="lang" id="lang" class="form-control mb-2">
+                                    <option value="fa">
+                                        فارسی
+                                    </option>
+                                    <option value="en">
+                                        english
+                                    </option>
+                            </select>
+                        </div>
+ 
+
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label class="required ">read time</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="number" name="read_time" class="form-control mb-2" />
+                            <!--end::Input-->
+                        </div>
+
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label class="required ">Subtext</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" name="subtext" class="form-control mb-2" placeholder="Product subtext" value="" />
+                            <!--end::Input-->
+                        </div>
+
                         <!--end::Input group-->
                         <!--begin::Input group-->
                         <div>
@@ -40,13 +95,7 @@
                             <label class="">Description</label>
                             <!--end::Label-->
                             <!--begin::Editor-->
-                            <div id="kt_ecommerce_add_category_description" 
-                                 name="kt_ecommerce_add_category_description"
-                                 class="min-h-200px mb-2"></div>
-
-                            <textarea name="content" id="editor"></textarea>
-                            <textarea id="ckeditor1" class="form-control"></textarea>
-
+                                 <textarea name="text" id="editor"></textarea>
                             <!--end::Editor-->
                             <!--begin::Description-->
                             <div class="text-muted fs-7">Set a description to the category for better visibility.</div>
@@ -80,6 +129,7 @@
     </div>
     @push('custom-scripts')
     <script src="{{ asset('ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script> --}}
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js')}}"></script>
@@ -96,13 +146,26 @@
     <script src="{{asset('assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
     <script src="{{asset('assets/js/custom/utilities/modals/create-app.js')}}"></script>
     <script src="{{asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
-    CKEDITOR.replace('ckeditor1' ,{
-        filebrowserUploadUrl : '/admin/panel/upload-image',
-        filebrowserImageUploadUrl :  '/admin/panel/upload-image',
-    });
+    
+    <script>
+        ClassicEditor
 
-    config.extraPlugins = 'uploadimage';
-    config.uploadUrl = '/uploader/upload.php';
+        .create( document.querySelector( '#editor' ),{
 
-    @endpush
+            ckfinder: {
+
+                uploadUrl: '{{route('dashboard.upload.image').'?_token='.csrf_token()}}',
+
+            }
+
+        })
+
+        .catch( error => {
+
+            
+
+        } );
+    </script>
+
+    @endpush       
 </x-app-layout>

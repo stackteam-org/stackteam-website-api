@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\ArticleController;
+use App\Http\Controllers\Dashboard\UploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::get('/', function () {
 Route::group(['prefix' => 'dashboard','as' => 'dashboard.' ,'middleware' => ['auth','verified']], function() {
     Route::get('/', function() {return view('dashboard');});
     Route::resource('article', ArticleController::class);
+    Route::post('upload', [UploadController::class,'upload'])->name('upload.image');
+
 
 //    Route::resource('/profile', UserProfileController::class);
 
