@@ -56,7 +56,7 @@ class ArticleController extends Controller
             'name' => $request->name,
             'title' => $request->title,
             'subtext' => $request->subtext,
-            'text' => $request->name,
+            'text' => $request->text,
             'category_id' => $request->category_id,
             'read_time' => $request->read_time,
             'lang' => $request->lang,
@@ -84,9 +84,10 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        $categories = Category::orderBy("created_at","desc")->get();   
+        return view('dashboard.article.edite', compact('article','categories'));
     }
 
     /**
@@ -96,10 +97,34 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        // Validate data
+        $validated = $request->validate([
+            'name'       => 'required',
+            'title'      => 'required',
+            'category_id'=> 'required',
+            'lang'       => 'required',
+            'read_time'  => 'required',
+            'subtext'    => 'required',
+            'text'       => 'required',
+        ]);
+    
+        // Update article
+        $article->update([
+            'name'       => $validated['name'],
+            'title'      => $validated['title'],
+            'category_id'=> $validated['category_id'],
+            'lang'       => $validated['lang'],
+            'read_time'  => $validated['read_time'],
+            'subtext'    => $validated['subtext'],
+            'text'       => $validated['text'],
+        ]);
+    
+        // Redirect to a given route with flash message
+        return redirect()->route('dashboard.article.index')->with('success', 'Article updated successfully.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -107,8 +132,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('dashboard.article.index')->with('success', 'Article deleted successfully.');
     }
 }

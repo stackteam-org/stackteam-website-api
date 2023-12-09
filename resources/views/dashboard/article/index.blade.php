@@ -79,7 +79,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <a href="#" 
+                                                        <a href="{{ route('dashboard.article.edit', $article) }}" 
                                                             class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center" 
                                                             data-kt-menu-trigger="click" 
                                                             data-kt-menu-placement="bottom-end">
@@ -95,7 +95,13 @@
                                                             <!--end::Menu item-->
                                                             <!--begin::Menu item-->
                                                             <div class="menu-item px-3">
-                                                                <a href="{{ route('dashboard.article.destroy', $article) }}" class="menu-link px-3" data-kt-ecommerce-category-filter="delete_row">حذف</a>
+                                                                <form action="{{ route('dashboard.article.destroy', $article) }}" method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button class="menu-link px-3">حذف</button>
+                                                                </form>
+                                                                {{-- <a href="javascript:void(0)" onclick="event.preventDefault(); deleteArticle('{{ route('dashboard.article.destroy', $article->id) }}');" class="menu-link px-3">حذف</a> --}}
+                                                                {{-- <a href="{{ route('dashboard.article.destroy', $article) }}" class="menu-link px-3" data-kt-ecommerce-category-filter="delete_row">حذف</a> --}}
                                                             </div>
                                                             <!--end::Menu item-->
                                                         </div>
@@ -118,4 +124,23 @@
         <!--end::Post-->
     </div>
 
+@push('custom-scripts')
+
+    <script>
+    function deleteArticle(url) {
+      if (confirm('Are you sure you want to delete this article?')) {
+        $.ajax({
+          url: url,
+          type: 'DELETE', // درخواست HTTP DELETE
+          data: {
+            '_token': '{{ csrf_token() }}', // توکن CSRF
+          },
+          success: function(response) {
+            window.location.href = '/articles';
+          }
+        });
+      }
+    }
+    </script>
+@endpush
 </x-app-layout>
