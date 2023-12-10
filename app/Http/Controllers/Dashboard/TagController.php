@@ -81,7 +81,7 @@ class TagController extends Controller
     {
        
         $categories = Category::orderBy("created_at","desc")->get();   
-        return view('dashboard.artid  name   text   category_id    visit    lang icle.edit', compact('article','categories'));
+        return view('dashboard.tag.edit', compact('article','categories'));
    
     }
 
