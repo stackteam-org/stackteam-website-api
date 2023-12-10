@@ -43,7 +43,6 @@ class TagController extends Controller
         $request->validate([
             'name' => 'required',
             'text' => 'required',
-            'category_id' => 'required',
             'lang' => 'required',
 
         ]);

@@ -52,10 +52,9 @@ class ArticleController extends Controller
         $pagination = $articlesQuery->with(['author', 'category', 'tags'])
                                   ->paginate($count);
 
-        // return response()->json($articles);
-           // تفکیک اطلاعات پیجینیشن
+         // return response()->json($articles);
+        // تفکیک اطلاعات پیجینیشن
 
-        //    dd($pagination->items());
     $response = [
         'data' => $pagination->items(),
         'meta' => [

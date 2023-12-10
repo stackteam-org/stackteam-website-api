@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy("created_at","desc")->paginate(10);
+        return view("dashboard.category.index", compact("categories"));
     }
 
     /**
@@ -24,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view("dashboard.category.create");
     }
 
     /**
@@ -35,7 +37,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                    
+        $request->validate([
+            'name' => 'required',
+            'text' => 'required',
+            'lang' => 'required',
+
+        ]);
+        $author_id = auth()->user()->id;
+
+        Category::create([
+            'name' => $request->name,
+            'text' => $request->text,
+            'lang' => $request->lang,
+
+        ]);
+        return redirect()->route('dashboard.category.index')->with('success','Company has been created successfully.');
+
     }
 
     /**
@@ -55,9 +73,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('dashboard.category.edit', compact('category'));
     }
 
     /**
@@ -67,9 +85,24 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $validated = $request->validate([
+            'name'       => 'required',
+            'lang'       => 'required',
+            'text'       => 'required',
+        ]);
+        
+        // Update article
+        $category->update([
+            'name'       => $validated['name'],
+            'lang'       => $validated['lang'],
+            'text'       => $validated['text'],
+        ]);
+    
+        // Redirect to a given route with flash message
+        return redirect()->route('dashboard.category.index')->with('success', 'Article updated successfully.');
+   
     }
 
     /**
@@ -78,8 +111,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('dashboard.category.index')->with('success', 'Article deleted successfully.');
     }
 }
