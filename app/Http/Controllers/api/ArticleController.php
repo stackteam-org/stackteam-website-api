@@ -54,6 +54,8 @@ class ArticleController extends Controller
 
         // return response()->json($articles);
            // تفکیک اطلاعات پیجینیشن
+
+        //    dd($pagination->items());
     $response = [
         'data' => $pagination->items(),
         'meta' => [
@@ -131,6 +133,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        // dd($article->image_url);
         return response()->json($article);
     }
 

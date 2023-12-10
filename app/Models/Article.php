@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -21,7 +22,7 @@ class Article extends Model
         'like', 
         'lang' 
         ];
-
+        protected $appends = ['image_url'];
     public function author()
     {
         return $this->belongsTo(User::class,'author_id');
@@ -47,5 +48,16 @@ class Article extends Model
         $this->like++;
 
         return $this->save();
+    }
+
+    public function getImageUrlAttribute()
+    {
+        $fileExtension = 'jpg';
+
+        if (Storage::disk('public')->exists("articles/{$this->id}.{$fileExtension}")) {
+            return Storage::disk('public')->url("articles/{$this->id}.{$fileExtension}");
+        }
+
+        return Storage::disk('public')->url('default.jpg');
     }
 }

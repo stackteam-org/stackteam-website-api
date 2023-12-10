@@ -77,12 +77,10 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-       
         $categories = Category::orderBy("created_at","desc")->get();   
-        return view('dashboard.tag.edit', compact('article','categories'));
-   
+        return view('dashboard.tag.edit', compact('tag','categories'));
     }
 
     /**
@@ -92,9 +90,25 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
-        //
+        $validated = $request->validate([
+            'name'       => 'required',
+            'category_id'=> 'required',
+            'lang'       => 'required',
+            'text'       => 'required',
+        ]);
+    
+        // Update article
+        $tag->update([
+            'name'       => $validated['name'],
+            'category_id'=> $validated['category_id'],
+            'lang'       => $validated['lang'],
+            'text'       => $validated['text'],
+        ]);
+    
+        // Redirect to a given route with flash message
+        return redirect()->route('dashboard.tag.index')->with('success', 'Article updated successfully.');
     }
 
     /**
@@ -103,8 +117,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->route('dashboard.tag.index')->with('success', 'Article deleted successfully.');
     }
 }

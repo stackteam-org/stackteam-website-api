@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -52,7 +53,7 @@ class ArticleController extends Controller
         ]);
         $author_id = auth()->user()->id;
 
-        Article::create([
+        $article = Article::create([
             'name' => $request->name,
             'title' => $request->title,
             'subtext' => $request->subtext,
@@ -63,6 +64,14 @@ class ArticleController extends Controller
             'author_id' =>  $author_id ,
 
         ]);
+
+
+        if ($request->hasFile('avatar')) {
+            $filename = $article->id . '.' . $request->file('avatar')->getClientOriginalExtension();
+            $request->file('avatar')->storeAs('articles', $filename, 'public');
+        }
+
+
         return redirect()->route('dashboard.article.index')->with('success','Company has been created successfully.');
 
     }
