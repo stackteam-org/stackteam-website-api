@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\ArticleController;
 use App\Http\Controllers\api\AuthorController;
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\ConsultationRequestController;
 use App\Http\Controllers\api\TagController;
 use App\Http\Controllers\api\TechnologyCategoryController;
 use Illuminate\Http\Request;
@@ -40,3 +41,4 @@ Route::resource('category',CategoryController::class)->only(['index']);
 Route::get('/authors', [AuthorController::class, 'getAuthors']);
 Route::get('/technologies', [TechnologyCategoryController::class, 'index']);
 Route::post('/articles/category/', [ArticleController::class, 'getArticlesByCategory']);
+Route::post('/consultation/request', [ConsultationRequestController::class,'store']);

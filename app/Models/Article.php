@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +21,7 @@ class Article extends Model
         'visit',
         'read_time', 
         'like', 
+        'published', 
         'lang' 
         ];
         protected $appends = ['image_url'];
@@ -59,5 +61,12 @@ class Article extends Model
         }
 
         return Storage::disk('public')->url('default.jpg');
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('published', function (Builder $builder) {
+            $builder->where('published', true);
+        });
     }
 }

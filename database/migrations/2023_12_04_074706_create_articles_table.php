@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('read_time');
             $table->integer('like')->default(0);
             $table->enum('lang', ['en', 'fa']);
+            $table->boolean('published')->default(false);
             $table->timestamps();
 
         });
