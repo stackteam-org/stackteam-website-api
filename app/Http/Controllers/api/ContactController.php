@@ -10,7 +10,6 @@ class ContactController extends Controller
 {
     public function store(Request $request)
     {
-        
         $contact = Contact::create($request->all());
         return response()->json(['message' => 'درخواست مشاوره با موفقیت ایجاد شد', 'data' => $contact], 201);
     }

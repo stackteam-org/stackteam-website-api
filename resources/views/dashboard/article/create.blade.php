@@ -19,8 +19,9 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
 
+                
 
-						<div class="content flex-row-fluid" id="kt_content">
+						{{-- <div class="content flex-row-fluid" id="kt_content">
 							<form class="form d-flex flex-column flex-lg-row" action="{{route('dashboard.article.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
 								<!--begin::Aside column-->
@@ -221,7 +222,7 @@
 								</div>
 								<!--end::Main column-->
 							</form>
-						</div>
+						</div> --}}
                 {{-- //////////////test////////////// --}}
                 {{-- <div class="card-body pt-0">
                     <form action="{{route('dashboard.article.store')}}" method="POST">
@@ -371,6 +372,7 @@
 
         } );
     </script>
+    @vite(['resources/js/editorjs/editor.js'])
 
     @endpush       
 </x-app-layout>

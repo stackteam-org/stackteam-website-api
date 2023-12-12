@@ -130,9 +130,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        // dd($article->image_url);
+        $article = Article::with(['author','category','tags'])->findOrFail($id);
         return response()->json($article);
     }
 
