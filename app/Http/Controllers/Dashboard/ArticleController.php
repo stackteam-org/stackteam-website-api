@@ -40,39 +40,52 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'name' => 'required',
-            'title' => 'required',
-            'subtext' => 'required',
-            'text' => 'required',
-            'category_id' => 'required',
-            'read_time' => 'required',
-            'lang' => 'required',
+        // return $request->text;
+        // $request->validate([
+        //     'name' => 'required',
+        //     'title' => 'required',
+        //     'subtext' => 'required',
+        //     'text' => 'required',
+        //     'category_id' => 'required',
+        //     'read_time' => 'required',
+        //     'lang' => 'required',
 
-        ]);
+        // ]);
+        $textArray = json_encode($request->text, true); // تبدیل JSON به آرایه انجام می‌شود
         $author_id = auth()->user()->id;
-
         $article = Article::create([
-            'name' => $request->name,
-            'title' => $request->title,
-            'subtext' => $request->subtext,
-            'text' => $request->text,
-            'category_id' => $request->category_id,
-            'read_time' => $request->read_time,
-            'lang' => $request->lang,
+            'name' => 'dd',
+            'title' => 'erw',
+            'subtext' => 'dffddfdfdfdf',
+            'text' => $textArray,
+            'category_id' => 1,
+            'read_time' => 11,
+            'lang' => 'fa',
             'author_id' =>  $author_id ,
 
         ]);
+        return response()->json($article);
+
+        // $article = Article::create([
+        //     'name' => $request->name,
+        //     'title' => $request->title,
+        //     'subtext' => $request->subtext,
+        //     'text' => json_encode($request->text),
+        //     'category_id' => $request->category_id,
+        //     'read_time' => $request->read_time,
+        //     'lang' => $request->lang,
+        //     'author_id' =>  $author_id ,
+
+        // ]);
 
 
-        if ($request->hasFile('avatar')) {
-            $filename = $article->id . '.' . $request->file('avatar')->getClientOriginalExtension();
-            $request->file('avatar')->storeAs('articles', $filename, 'public');
-        }
+        // if ($request->hasFile('avatar')) {
+        //     $filename = $article->id . '.' . $request->file('avatar')->getClientOriginalExtension();
+        //     $request->file('avatar')->storeAs('articles', $filename, 'public');
+        // }
 
 
-        return redirect()->route('dashboard.article.index')->with('success','Company has been created successfully.');
+        // return redirect()->route('dashboard.article.index')->with('success','Company has been created successfully.');
 
     }
 

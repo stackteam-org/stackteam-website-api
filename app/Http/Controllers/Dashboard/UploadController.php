@@ -39,4 +39,9 @@ class UploadController extends Controller
         return response()->json(['uploaded' => false, 'error' => ['message' => 'Could not upload the image.']]);
     
     }
+
+
+    public function imageUpload(Request $request){
+        return response()->json($request);
+    }
 }

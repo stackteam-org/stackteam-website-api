@@ -18,9 +18,19 @@
                 </div>
                 <!--end::Card header-->
                 <!--begin::Card body-->
-
-                
-
+                <div class="flex flex-col w-full">
+                    <div id="editorjs" class="fs-4 fw-normal text-gray-800 mb-10"></div>
+                    <div class="d-flex align-items-center py-1">
+                    <a 
+                        id="save-data"
+                        data-image_upload="{{ route('image.upload') }}"
+                        href="{{route('dashboard.article.store')}}" 
+                        class="btn btn-flex btn-sm btn-primary fw-bold border-0 fs-6 h-40px">
+                        Ask Question
+                    </a>
+                    </div>
+                </div>
+          
 						{{-- <div class="content flex-row-fluid" id="kt_content">
 							<form class="form d-flex flex-column flex-lg-row" action="{{route('dashboard.article.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -352,7 +362,7 @@
     <script src="{{asset('assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
     <script src="{{asset('assets/js/custom/utilities/modals/create-app.js')}}"></script>
     <script src="{{asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
-    
+{{--     
     <script>
         ClassicEditor
 
@@ -371,8 +381,8 @@
             
 
         } );
-    </script>
-    @vite(['resources/js/editorjs/editor.js'])
+    </script> --}}
+    @vite(['resources/js/editor.js'])
 
     @endpush       
 </x-app-layout>

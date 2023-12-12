@@ -47,4 +47,7 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix'=> 'admin','as'=> 'admin','middleware'=> ['auth']], function() {
 });
 
+
+Route::any('/codex-image-uplode', [UploadController::class,'imageUpload'])->name('image.upload');
+
 require __DIR__.'/auth.php';
