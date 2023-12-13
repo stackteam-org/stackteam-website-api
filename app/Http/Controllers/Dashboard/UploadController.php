@@ -10,12 +10,12 @@ class UploadController extends Controller
 {
     public function upload(Request $request)
     {
-        // if ($request->hasFile('upload')) {
-        //     $originName = $request->file('upload')->getClientOriginalName();
+        // if ($request->hasFile('image')) {
+        //     $originName = $request->file('image')->getClientOriginalName();
         //     $fileName = pathinfo($originName, PATHINFO_FILENAME);
-        //     $extension = $request->file('upload')->getClientOriginalExtension();
+        //     $extension = $request->file('image')->getClientOriginalExtension();
         //     $fileName = $fileName . '_' . time() . '.' . $extension;
-        //     $request->upload->storeAs('public/media', $fileName);
+        //     $request->image->storeAs('public/media', $fileName);
 
         //     // $request->file('upload')->move(public_path('media'), $fileName);
 
@@ -23,21 +23,23 @@ class UploadController extends Controller
         //     return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
         // }
     
-        if ($request->hasFile('upload')) {
-            $originalName = $request->file('upload')->getClientOriginalName();
+        if ($request->hasFile('image')) {
+            $originalName = $request->file('image')->getClientOriginalName();
             $fileName = Str::slug(pathinfo($originalName, PATHINFO_FILENAME));
-            $extension = $request->file('upload')->getClientOriginalExtension();
+            $extension = $request->file('image')->getClientOriginalExtension();
             $fileName = $fileName . "_" . time() . "." . $extension;
 
-            $request->file('upload')->storeAs('public/ckeditor_images', $fileName);
+            $request->file('image')->storeAs('public/images', $fileName);
 
-            $url = Storage::url('ckeditor_images/' . $fileName);
+            $url = Storage::url('images/' . $fileName);
 
-            return response()->json(['uploaded' => true, 'url' => $url]);
+            return response()->json([
+                'success' => 1,
+                'file' => [
+                    'url'=> asset($url) ,
+                ],
+            ]);
         }
-
-        return response()->json(['uploaded' => false, 'error' => ['message' => 'Could not upload the image.']]);
-    
     }
 
 
