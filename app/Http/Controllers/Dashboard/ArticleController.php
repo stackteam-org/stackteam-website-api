@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy("created_at","desc")->paginate(10);
+        $articles = Article::withoutglobalScopes()->orderBy("created_at","desc")->paginate(10);
         return view("dashboard.article.index", compact("articles"));
     }
 
@@ -143,8 +143,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
+        $article = Article::withoutglobalScopes()->find( $id );
         $article->delete();
         return redirect()->route('dashboard.article.index')->with('success', 'Article deleted successfully.');
     }

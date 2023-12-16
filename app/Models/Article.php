@@ -52,15 +52,23 @@ class Article extends Model
         return $this->save();
     }
 
+    public function visit(): bool
+    {
+        $this->visit++;
+
+        return $this->save();
+    }
+
+
     public function getImageUrlAttribute()
     {
         $fileExtension = 'jpg';
 
         if (Storage::disk('public')->exists("articles/{$this->id}.{$fileExtension}")) {
-            return Storage::disk('public')->url("articles/{$this->id}.{$fileExtension}");
+            return Storage::url("articles/{$this->id}.{$fileExtension}");
+            // return Storage::disk('public')->url("articles/{$this->id}.{$fileExtension}");
         }
-
-        return Storage::disk('public')->url('default.jpg');
+        return Storage::url("articles/placeholder.svg");
     }
 
     protected static function booted()

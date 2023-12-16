@@ -133,6 +133,7 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Article::with(['author','category','tags'])->findOrFail($id);
+        $article->visit();
         return response()->json($article);
     }
 
