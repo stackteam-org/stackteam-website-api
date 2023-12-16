@@ -30,7 +30,7 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar">
                         <!--begin::Add customer-->
-                        <a href="{{ route('dashboard.article.create') }}" class="btn btn-primary">افزودن مقاله جدید</a>
+                        <a href="{{ route('dashboard.article.create') }}" class="test btn btn-primary">افزودن مقاله جدید</a>
                         <!--end::Add customer-->
                     </div>
                     <!--end::Card toolbar-->
@@ -127,17 +127,9 @@
                                                     </i></button>
                                                 </form> --}}
 
-												<a href="javascript:;" data-toggle="modal" data-id='{{$article->id}}' data-target="#exampleModalCenter" >
-													<i class="ki-duotone ki-trash fs-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                        <span class="path4"></span>
-                                                        <span class="path5"></span>
-                                                    </i>
-												</a>
+												
 
-                                                {{-- <a href="#"
+                                                <a href="#"
                                                     class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                                     <i class="ki-duotone ki-trash fs-2">
                                                         <span class="path1"></span>
@@ -146,7 +138,7 @@
                                                         <span class="path4"></span>
                                                         <span class="path5"></span>
                                                     </i>
-                                                </a> --}}
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
