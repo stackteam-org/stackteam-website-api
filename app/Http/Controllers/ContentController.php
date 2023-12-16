@@ -22,9 +22,8 @@ class ContentController extends Controller
     }
 
     public function wellcome (Request $request) {
-
         $lang = is_null($request->input('lang')) ? 'en' : $request->input('lang');
-
+        
         $response = Lang::get('wellcome',[],$lang);
         
         // get data form database -----------------------------
