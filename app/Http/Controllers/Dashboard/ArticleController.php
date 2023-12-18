@@ -42,7 +42,6 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-// dd($request->tags);
         $request->validate([
             'name' => 'required',
             'title' => 'required',
