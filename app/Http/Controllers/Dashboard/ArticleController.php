@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -29,7 +30,8 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::orderBy("created_at","desc")->get();
-        return view("dashboard.article.create", compact("categories"));
+        $tags = Tag::orderBy("created_at","desc")->get();
+        return view("dashboard.article.create", compact("categories","tags"));
     }
 
     /**
@@ -40,7 +42,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-
+// dd($request->tags);
         $request->validate([
             'name' => 'required',
             'title' => 'required',
@@ -64,9 +66,10 @@ class ArticleController extends Controller
             'read_time' => $request->read_time,
             'lang' => $request->lang,
             'author_id' =>  $author_id ,
+            'published' => $request->status
 
         ]);
-
+        $article->tags()->attach($request->tags);
 
         if ($request->hasFile('avatar')) {
             $filename = $article->id . '.' . $request->file('avatar')->getClientOriginalExtension();

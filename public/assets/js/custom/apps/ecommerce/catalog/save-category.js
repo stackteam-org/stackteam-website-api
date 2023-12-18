@@ -122,7 +122,7 @@ var KTAppEcommerceSaveCategory = function () {
             const value = e.target.value;
 
             switch (value) {
-                case "published": {
+                case "1": {
                     target.classList.remove(...statusClasses);
                     target.classList.add('bg-success');
                     hideDatepicker();
@@ -134,7 +134,7 @@ var KTAppEcommerceSaveCategory = function () {
                     showDatepicker();
                     break;
                 }
-                case "unpublished": {
+                case "0": {
                     target.classList.remove(...statusClasses);
                     target.classList.add('bg-danger');
                     hideDatepicker();
