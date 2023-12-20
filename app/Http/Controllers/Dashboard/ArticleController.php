@@ -99,8 +99,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $categories = Category::orderBy("created_at","desc")->get();   
-        return view('dashboard.article.edit', compact('article','categories'));
+        $categories = Category::orderBy("created_at","desc")->get();
+        $tags = Tag::orderBy("created_at","desc")->get();
+        return view('dashboard.article.edit', compact('article','categories',"tags"));
     }
 
     /**
