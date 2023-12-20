@@ -8,8 +8,9 @@
         <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
             <!--begin::Post-->
             <div class="content flex-row-fluid" id="kt_content">
-                <form class="myform form d-flex flex-column flex-lg-row" action="{{route('dashboard.article.store')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form class="myform form d-flex flex-column flex-lg-row" action="{{route('dashboard.article.update', $article->id)}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
                     <!--begin::Aside column-->
                     <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
                         <!--begin::Thumbnail settings-->

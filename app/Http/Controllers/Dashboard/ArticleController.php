@@ -122,8 +122,8 @@ class ArticleController extends Controller
             'read_time'  => 'required',
             'subtext'    => 'required',
             'text'       => 'required',
+            'status'     => 'required',
         ]);
-    
         // Update article
         $article->update([
             'name'       => $validated['name'],
@@ -133,8 +133,8 @@ class ArticleController extends Controller
             'read_time'  => $validated['read_time'],
             'subtext'    => $validated['subtext'],
             'text'       => $validated['text'],
+            'published'  => $validated['status'],
         ]);
-    
         // Redirect to a given route with flash message
         return redirect()->route('dashboard.article.index')->with('success', 'Article updated successfully.');
     }
