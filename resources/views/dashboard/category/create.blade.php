@@ -19,64 +19,121 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    <form action="{{route('dashboard.category.store')}}" method="POST">
+
+                    <form class="myform form d-flex flex-column flex-lg-row" action="{{route('dashboard.category.store')}}" method="POST">
                         @csrf
-                                           <!--begin::Input group-->
-                        <div class="mb-10 fv-row">
-                            <!--begin::Label-->
-                            <label class="required ">Name</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" name="name" class="form-control mb-2" placeholder="Product name" value="" />
-                            <!--end::Input-->
+                        <!--begin::Aside column-->
+                        <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+    
+                            <!--begin::Template settings-->
+                            <div class="card card-flush py-4">
+                                <!--begin::Card header-->
+                                <div class="card-header">
+                                    <!--begin::Card title-->
+                                    <div class="card-title">
+                                        <h2>زبان دسته</h2>
+                                    </div>
+                                    <!--end::Card title-->
+                                </div>
+                                <!--end::Card header-->
+                                <!--begin::Card body-->
+                                <div class="card-body pt-0">
+                                    <!--begin::Select store template-->
+                                    <label for="kt_ecommerce_add_category_store_template" class="form-label">زبان مقاله را انتخاب کنید</label>
+                                    <!--end::Select store template-->
+                                    <!--begin::Select2-->
+                                    <select name="lang" id="lang" class="form-control form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_category_store_template">
+                                        <option value="fa">
+                                            فارسی
+                                        </option>
+                                        <option value="en">
+                                            english
+                                        </option>
+                                     </select>
+                                    <!--end::Select2-->
+                                    <!--begin::Description-->
+                                    <div class="text-muted fs-7">Assign a template from your current theme to define how the category products are displayed.</div>
+                                    <!--end::Description-->
+                                </div>
+                                <!--end::Card body-->
+                            </div>
+                            <!--end::Template settings-->
+                      
                         </div>
-
-
- 
-                        <div class="mb-10 fv-row w-50">
-                            <!--begin::Label-->
-                            <label class="required ">langoage</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <select name="lang" id="lang" class="form-control mb-2">
-                                    <option value="fa">
-                                        فارسی
-                                    </option>
-                                    <option value="en">
-                                        english
-                                    </option>
-                            </select>
+                        <!--end::Aside column-->
+                        <!--begin::Main column-->
+                        <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+                            <!--begin::General options-->
+                            <div class="card card-flush py-4">
+                                <!--begin::Card header-->
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <h2>دسته </h2>
+                                    </div>
+                                </div>
+                                <!--end::Card header-->
+                                <!--begin::Card body-->
+                                <div class="card-body pt-0">
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required form-label">نام دسته</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input type="text" name="name" class="form-control mb-2" placeholder="نام مقاله را بنویسید" value="" />
+                                        <!--end::Input-->
+                                        <!--begin::Description-->
+                                        <div class="text-muted fs-7">نام مقاله بیشتر از بیست حرف نباشد.</div>
+                                        <!--end::Description-->
+                                    </div>
+                                    {{-- <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required ">عنوان مقاله</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input type="text" name="title" class="form-control mb-2" placeholder="عنوان را بنویسید" value="" />
+                                        <!--end::Input-->
+                                        <div class="text-muted fs-7">عنوان مقاله بیشتر از بیست حرف نباشد.</div>
+                                    </div> --}}
+    
+            
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div>
+                                        <!--begin::Label-->
+                                        <label class="form-label">توضیحات دسته</label>
+                                        <!--end::Label-->
+                                        <!--begin::Editor-->
+                                        <textarea name="text" class="form-control mb-2" placeholder="نام مقاله را بنویسید">
+                                        </textarea>
+                                                                                <!--end::Editor-->
+                                        <!--begin::Description-->
+                                        <div class="text-muted fs-7">.ساختار و بدنه مقاله خود را اینجا طراحی کنید</div>
+                                        <!--end::Description-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Card header-->
+                            </div>
+                            <!--end::General options-->
+                            <div class="d-flex justify-content-end">
+                                <!--begin::Button-->
+                                <a href="{{ route('dashboard.category.index') }}"
+                                id="kt_ecommerce_add_product_cancel" 
+                                class="btn btn-light me-5">
+                                Cancel
+                                </a>
+                                <!--end::Button-->
+                                <!--begin::Button-->
+                                <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+                                    <span class="indicator-label">Save Changes</span>
+                                    <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                                <!--end::Button-->
+                            </div>
                         </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div>
-                            <!--begin::Label-->
-                            <label class="">Description</label>
-                            <!--end::Label-->
-                            <!--begin::Editor-->
-                                 <textarea name="text" id="editor"></textarea>
-                            <!--end::Editor-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Set a description to the category for better visibility.</div>
-                            <!--end::Description-->
-                        </div>
-                        <!--end::Input group-->
-                        <div class="d-flex justify-content-end">
-                            <!--begin::Button-->
-                            <a href="{{ route('dashboard.category.index') }}"
-                            id="kt_ecommerce_add_product_cancel" 
-                            class="btn btn-light me-5">
-                            Cancel
-                            </a>
-                            <!--end::Button-->
-                            <!--begin::Button-->
-                            <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                                <span class="indicator-label">Save Changes</span>
-                                <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                            <!--end::Button-->
-                        </div>
+                        <!--end::Main column-->
                     </form>
                 </div>
                 <!--end::Card header-->

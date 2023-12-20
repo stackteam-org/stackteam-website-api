@@ -4,101 +4,133 @@
                 {{ __('Dashboard') }}
             </h2>
         </x-slot>
-
-    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
-        <!--begin::Post-->
-        <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
-            <!--begin::General options-->
-            <div class="card card-flush py-4">
-                <!--begin::Card header-->
-                <div class="card-header">
-                    <div class="card-title">
-                        <h2>General</h2>
-                    </div>
-                </div>
-                <!--end::Card header-->
-                <!--begin::Card body-->
-                <div class="card-body pt-0">
-                    <form action="{{route('dashboard.tag.store')}}" method="POST">
-                        @csrf
-                                           <!--begin::Input group-->
-                        <div class="mb-10 fv-row">
-                            <!--begin::Label-->
-                            <label class="required ">Name</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" name="name" class="form-control mb-2" placeholder="Product name" value="" />
-                            <!--end::Input-->
+        <form action="{{route('dashboard.tag.store')}}" method="POST">
+            @csrf
+        <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+ 
+                <!--begin::Post-->
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+        
+                    <!--begin::Template settings-->
+                    <div class="card card-flush py-4">
+                        <!--begin::Card header-->
+                        <div class="card-header">
+                            <!--begin::Card title-->
+                            <div class="card-title">
+                                <h2>زبان تگ</h2>
+                            </div>
+                            <!--end::Card title-->
                         </div>
-          
-                        <div class="mb-10 fv-row w-50">
-                            <!--begin::Label-->
-                            <label class="required ">Category</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <select name="category_id" id="category_id" class="form-control mb-2">
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}"{{ old('category_id') == $category->id ? ' selected' : '' }}>
+                        <!--end::Card header-->
+                        <!--begin::Card body-->
+                        <div class="card-body pt-0">
+                            <!--begin::Select store template-->
+                            <label for="kt_ecommerce_add_category_store_template" class="form-label">زبان مقاله را انتخاب
+                                کنید</label>
+                            <!--end::Select store template-->
+                            <!--begin::Select2-->
+                            <select name="lang" id="lang" class="form-control form-select mb-2" data-control="select2"
+                                data-hide-search="true" data-placeholder="Select an option"
+                                id="kt_ecommerce_add_category_store_template">
+                                <option value="fa">
+                                    فارسی
+                                </option>
+                                <option value="en">
+                                    english
+                                </option>
+                            </select>
+                            <!--end::Select2-->
+                        </div>
+                        <!--end::Card body-->
+                        <!--begin::Card body-->
+                        <div class="card-body pt-0">
+                            <!--begin::Select store template-->
+                            <label for="kt_ecommerce_add_category_store_template" class="form-label">یک دسته را انتخاب
+                                کنید</label>
+                            <!--end::Select store template-->
+                            <!--begin::Select2-->
+        
+                            <select name="category_id" id="category_id" class="form-control form-select mb-2"
+                                data-control="select2" data-hide-search="true" data-placeholder="Select an option"
+                                id="kt_ecommerce_add_category_store_template">
+                                <option></option>
+                                @foreach ($categories as $category)
+                                    <option
+                                        value="{{ $category->id }}"{{ old('category_id') == $category->id ? ' selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
                             </select>
+                            <!--end::Select2-->
                         </div>
-
- 
-                        <div class="mb-10 fv-row w-50">
-                            <!--begin::Label-->
-                            <label class="required ">langoage</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <select name="lang" id="lang" class="form-control mb-2">
-                                    <option value="fa">
-                                        فارسی
-                                    </option>
-                                    <option value="en">
-                                        english
-                                    </option>
-                            </select>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Template settings-->
+        
+                </div>
+                <!--end::Aside column-->
+                <!--begin::Main column-->
+                <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+                    <!--begin::General options-->
+                    <div class="card card-flush py-4">
+                        <!--begin::Card header-->
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>تگ </h2>
+                            </div>
                         </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div>
-                            <!--begin::Label-->
-                            <label class="">Description</label>
-                            <!--end::Label-->
-                            <!--begin::Editor-->
-                                 <textarea name="text" id="editor"></textarea>
-                            <!--end::Editor-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Set a description to the category for better visibility.</div>
-                            <!--end::Description-->
+                        <!--end::Card header-->
+                        <!--begin::Card body-->
+                        <div class="card-body pt-0">
+                            <!--begin::Input group-->
+                            <div class="mb-10 fv-row">
+                                <!--begin::Label-->
+                                <label class="required form-label">نام تگ</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="name" class="form-control mb-2"
+                                    placeholder="نام مقاله را بنویسید" value="" />
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div>
+                                <!--begin::Label-->
+                                <label class="form-label">توضیحات تگ</label>
+                                <!--end::Label-->
+                                <!--begin::Editor-->
+                                <textarea name="text" class="form-control mb-2" placeholder="توضیحات">
+                                </textarea>
+                                <!--end::Editor-->
+                                >
+                            </div>
+                            <!--end::Input group-->
                         </div>
-                        <!--end::Input group-->
-                        <div class="d-flex justify-content-end">
-                            <!--begin::Button-->
-                            <a href="{{ route('dashboard.tag.index') }}"
-                            id="kt_ecommerce_add_product_cancel" 
+                        <!--end::Card header-->
+                    </div>
+        
+                    <!--end::Input group-->
+                    <div class="d-flex justify-content-end">
+                        <!--begin::Button-->
+                        <a href="{{ route('dashboard.tag.index') }}" id="kt_ecommerce_add_product_cancel"
                             class="btn btn-light me-5">
                             Cancel
-                            </a>
-                            <!--end::Button-->
-                            <!--begin::Button-->
-                            <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                                <span class="indicator-label">Save Changes</span>
-                                <span class="indicator-progress">Please wait...
+                        </a>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+                            <span class="indicator-label">Save Changes</span>
+                            <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                            <!--end::Button-->
-                        </div>
+                        </button>
+                        <!--end::Button-->
+                    </div>
                     </form>
                 </div>
                 <!--end::Card header-->
-            </div>
-
         </div>
-    
-        <!--end::Post-->
-    </div>
+    </form>
+
     @push('custom-scripts')
     <script src="{{ asset('ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script> --}}
