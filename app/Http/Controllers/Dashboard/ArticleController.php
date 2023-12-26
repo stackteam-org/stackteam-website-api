@@ -32,7 +32,6 @@ class ArticleController extends Controller
         $categories = Category::orderBy("created_at","desc")->get();
         $tags = Tag::orderBy("created_at","desc")->get();
         return view("dashboard.article.create", compact("categories","tags"));
-        
     }
 
     /**
